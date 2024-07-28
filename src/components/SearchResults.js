@@ -1,22 +1,26 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 
 const SearchResults = ({ results }) => {
-  const location = useLocation();
-  console.log('Location:', location);
+  if (!Array.isArray(results)) {
+    return <p>No results found.</p>;
+  }
 
   return (
     <div>
-      <h2>Search Results</h2>
-      {results.length === 0 ? (
-        <p>No results found</p>
-      ) : (
-        <ul>
-          {results.map((song, index) => (
-            <li key={index}>{song.title}</li>
-          ))}
-        </ul>
-      )}
+      {results.map((result) => (
+        <div key={result.id}>
+          <h3>{result.title}</h3>
+          <p>{result.japanese_title}</p>
+          <p>{result.artist}</p>
+          <p>{result.unit}</p>
+          <p>Level: {result.level}</p>
+          <p>BPM: {result.bpm}</p>
+          <p>Note Count: {result.note_count}</p>
+          <p>Duration: {result.duration}</p>
+          <p>Available in EN: {result.available_in_en ? 'Yes' : 'No'}</p>
+          <p>Commissioned: {result.commission ? 'Yes' : 'No'}</p>
+        </div>
+      ))}
     </div>
   );
 };

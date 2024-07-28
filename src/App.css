@@ -1,20 +1,6 @@
-body{
-  text-align: center;
-}
-
 .App {
   text-align: center;
 }
-
-input {
-  margin: 10px;
-}
-
-button {
-  margin: 20px;
-  padding: 10px;
-}
-
 
 .App-logo {
   height: 40vmin;
