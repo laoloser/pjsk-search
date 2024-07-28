@@ -10,7 +10,7 @@ const App = () => {
       const query = new URLSearchParams(searchParams).toString();
       const response = await fetch(`https://pjsk-search-backend-production.up.railway.app/songs?${query}`);
       const data = await response.json();
-      setSearchResults(data);
+      setSearchResults(Array.isArray(data) ? data : []); // Ensure data is an array
     } catch (error) {
       console.error('Error fetching songs:', error);
       setSearchResults([]); // Ensure searchResults is always an array
