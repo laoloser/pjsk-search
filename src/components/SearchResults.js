@@ -1,4 +1,6 @@
 import React from 'react';
+import Table from 'react-bootstrap/Table';
+import "./SearchResults.css";
 
 const SearchResults = ({ results }) => {
   if (!Array.isArray(results)) {
@@ -6,22 +8,38 @@ const SearchResults = ({ results }) => {
   }
 
   return (
-    <div>
-      {results.map((result) => (
-        <div key={result.id}>
-          <h3>{result.title}</h3>
-          <p>{result.japanese_title}</p>
-          <p>{result.artist}</p>
-          <p>{result.unit}</p>
-          <p>Level: {result.level}</p>
-          <p>BPM: {result.bpm}</p>
-          <p>Note Count: {result.note_count}</p>
-          <p>Duration: {result.duration}</p>
-          <p>Available in EN: {result.available_in_en ? 'Yes' : 'No'}</p>
-          <p>Commissioned: {result.commission ? 'Yes' : 'No'}</p>
-        </div>
-      ))}
-    </div>
+    <Table striped bordered hover variant="dark" className="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Japanese Title</th>
+          <th>Artist</th>
+          <th>Unit</th>
+          <th>Level</th>
+          <th>BPM</th>
+          <th>Note Count</th>
+          <th>Duration</th>
+          <th>Available in EN</th>
+          <th>Commissioned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {results.map((result, index) => (
+          <tr key={result.id}>
+            <td>{result.title}</td>
+            <td>{result.japanese_title}</td>
+            <td>{result.artist}</td>
+            <td>{result.unit}</td>
+            <td>{result.level}</td>
+            <td>{result.bpm}</td>
+            <td>{result.note_count}</td>
+            <td>{result.duration}</td>
+            <td>{result.available_in_en ? 'Yes' : 'No'}</td>
+            <td>{result.commission ? 'Yes' : 'No'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
 };
 

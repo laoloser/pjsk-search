@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
+import "./App.css";
 
 const App = () => {
   const [searchResults, setSearchResults] = useState([]);

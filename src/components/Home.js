@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./Home.css";
 
 const Home = ({ onSearch }) => {
   const [term, setTerm] = useState('');
