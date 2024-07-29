@@ -23,7 +23,7 @@ const Home = ({ onSearch }) => {
                 <Form.Group controlId="searchQuery">
                     <Form.Control
                         type="text"
-                        placeholder="Search by title, Japanese title, or artist"
+                        placeholder="Search by title, or artist"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
