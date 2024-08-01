@@ -16,6 +16,7 @@ const SearchResults = ({ results }) => {
           <th>Japanese Title</th>
           <th>Artist</th>
           <th>Unit</th>
+          <th>Difficulty</th>
           <th>Level</th>
           <th>BPM</th>
           <th>Note Count</th>
@@ -31,6 +32,7 @@ const SearchResults = ({ results }) => {
             <td>{result.japanese_title}</td>
             <td>{result.artist}</td>
             <td>{result.unit}</td>
+            <td>{result.difficulty}</td>
             <td>{result.level}</td>
             <td>{result.bpm}</td>
             <td>{result.note_count}</td>
