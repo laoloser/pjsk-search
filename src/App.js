@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'; // Notice 'Routes' instead of 'Switch'
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
+import DBEntry from './components/dbentry'; // Ensure this import is correct
 import "./App.css";
 
 const App = () => {
@@ -9,20 +11,24 @@ const App = () => {
   const handleSearch = async (searchParams) => {
     try {
       const query = new URLSearchParams(searchParams).toString();
-      const response = await fetch(`https://pjsk-search-backend-production.up.railway.app/songs?${query}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}?${query}`);
       const data = await response.json();
-      setSearchResults(Array.isArray(data) ? data : []); // Ensure data is an array
+      setSearchResults(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Error fetching songs:', error);
-      setSearchResults([]); // Ensure searchResults is always an array
+      setSearchResults([]);
     }
   };
 
   return (
-    <div>
-      <Home onSearch={handleSearch} />
-      <SearchResults results={searchResults} />
-    </div>
+    <Router>
+      <div>
+        <Routes> {/* Use 'Routes' instead of 'Switch' */}
+          <Route path={process.env.REACT_APP_DB_ENTRY_PATH} element={<DBEntry />} /> {/* Update Route usage */}
+          <Route path="/" element={<><Home onSearch={handleSearch} /><SearchResults results={searchResults} /></>} /> {/* Wrap multiple components in a fragment */}
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
