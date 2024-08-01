@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./dbentry.css";
 
 const initialEntryState = {
@@ -37,20 +39,21 @@ const DBEntry = () => {
         body: JSON.stringify(entry) // Ensure that the entry is correctly formatted
       });
       if (response.ok) {
-        alert('Entry submitted successfully');
+        toast.success('Entry submitted successfully');
         // Do not reset fields
       } else {
-        alert('Failed to submit entry');
+        toast.error('Failed to submit entry');
       }
     } catch (error) {
       console.error('Error submitting entry:', error);
-      alert('Error submitting entry');
+      toast.error('Error submitting entry');
     }
   };
 
   // Reset form to initial state
   const handleClear = () => {
     setEntry(initialEntryState);
+    toast.info('Form cleared');
   };
 
   return (
@@ -95,6 +98,7 @@ const DBEntry = () => {
       </div>
       <button type="submit">Submit Entry</button>
       <button type="button" onClick={handleClear}>Clear</button> {/* Add a clear button */}
+      <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
     </form>
   );
 };
