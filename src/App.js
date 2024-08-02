@@ -13,7 +13,7 @@ const App = () => {
   const handleSearch = async (searchParams) => {
     try {
       const query = new URLSearchParams(searchParams).toString();
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}?${query}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/songs?${query}`);
       const data = await response.json();
       setSearchResults(Array.isArray(data) ? data : []);
     } catch (error) {
