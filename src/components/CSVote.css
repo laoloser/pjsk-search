@@ -1,0 +1,33 @@
+div {
+    color: white;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+}
+
+.option-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.option {
+    padding: 10px;
+    border: 2px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+}
+
+.option.selected {
+    border-color: blue;
+    background-color: #add8e6;
+}
+
+.submit-vote {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
