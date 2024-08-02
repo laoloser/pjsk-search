@@ -25,7 +25,7 @@ const App = () => {
       <div>
         <Routes> {/* Use 'Routes' instead of 'Switch' */}
           <Route path={process.env.REACT_APP_DB_ENTRY_PATH} element={<DBEntry />} /> {/* Update Route usage */}
-          <Route path="/" element={<><Home onSearch={handleSearch} /><SearchResults results={searchResults} /></>} /> {/* Wrap multiple components in a fragment */}
+          <Route path="/songsearch" element={<><Home onSearch={handleSearch} /><SearchResults results={searchResults} /></>} /> {/* Wrap multiple components in a fragment */}
         </Routes>
       </div>
     </Router>
