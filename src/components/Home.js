@@ -8,6 +8,7 @@ const Home = ({ onSearch }) => {
   const [commission, setCommission] = useState(false);
   const [minLevel, setMinLevel] = useState('');
   const [maxLevel, setMaxLevel] = useState('');
+  const [sortBy, setSortBy] = useState('title');
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ const Home = ({ onSearch }) => {
       commission,
       minLevel,
       maxLevel,
+      sortBy,
     };
     onSearch(searchParams);
   };
@@ -30,6 +32,7 @@ const Home = ({ onSearch }) => {
     'WonderlandsxShowtime': 'WXS',
     'Vivid BAD SQUAD': 'VBS',
     '25-ji, Nightcord de': 'N25',
+    'Other' : 'other',
   };
 
   return (
@@ -89,6 +92,16 @@ const Home = ({ onSearch }) => {
           value={maxLevel}
           onChange={(e) => setMaxLevel(e.target.value)}
         />
+      </div>
+      <div>
+        <label>Sort by:</label>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="title">Title</option>
+          <option value="level">Level</option>
+          <option value="bpm">BPM</option>
+          <option value="duration">Duration</option>
+          <option value="note_count">Note Count</option>
+        </select>
       </div>
       <button type="submit">Search</button>
     </form>
