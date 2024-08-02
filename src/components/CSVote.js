@@ -79,6 +79,7 @@ const CSVote = () => {
     return (
         <div>
             <h1>Challenge Show Votes</h1>
+            <h4>Vote for who you want the challenge show to be</h4>
             {!hasVoted ? (
                 <form onSubmit={handleSubmit}>
                     {options.map((group, index) => (
@@ -110,7 +111,7 @@ const CSVote = () => {
                     </ul>
                 </div>
             )}
-            <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+            <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
         </div>
     );
 };

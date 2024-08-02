@@ -5,6 +5,7 @@ import SearchResults from './components/SearchResults';
 import DBEntry from './components/dbentry'; // Ensure this import is correct
 import "./App.css";
 import CSVote from './components/CSVote';
+import NukeVotes from './components/NukeVotes';
 
 const App = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -28,6 +29,7 @@ const App = () => {
           <Route path={process.env.REACT_APP_DB_ENTRY_PATH} element={<DBEntry />} /> {/* Update Route usage */}
           <Route path="/songsearch" element={<><Home onSearch={handleSearch} /><SearchResults results={searchResults} /></>} /> {/* Wrap multiple components in a fragment */}
         <Route path="/csvote" element={<CSVote />} />
+        <Route path="/nukevotes" element={<NukeVotes />} />
         </Routes>
       </div>
     </Router>
