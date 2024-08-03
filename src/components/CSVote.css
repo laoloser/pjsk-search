@@ -3,6 +3,16 @@ div {
     text-align: center;
 }
 
+img{
+    height:100px;
+}
+
+.vote-item{
+    max-width:100%;
+    margin: 0 auto;
+    padding-right:50px;
+}
+
 li {
     list-style: none;
 }
@@ -13,12 +23,13 @@ h1 {
 
 .option-row {
     display: flex;
-    justify-content: space-around;
+    justify-content:center;
     margin-bottom: 10px;
+    width:300px;
 }
 
 .option {
-    padding: 10px;
+    padding: 5px;
     border: 2px solid #ccc;
     background-color: white;
     cursor: pointer;
@@ -30,8 +41,9 @@ h1 {
 }
 
 .submit-vote {
-    margin-top: 20px;
+    margin: 20px auto;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    max-width: 150px;
 }

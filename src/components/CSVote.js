@@ -9,11 +9,7 @@ const CSVote = () => {
     const [voteCounts, setVoteCounts] = useState([]); // State to store vote counts
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            fetchVoteCounts();
-        }, 1000); // Fetch vote counts every 5 seconds
-
-        return () => clearInterval(intervalId); // Clear interval on component unmount
+        fetchVoteCounts();
     }, []);
 
     const options = [
@@ -25,18 +21,12 @@ const CSVote = () => {
         { row: 6, items: ['Kanade', 'Mafuyu', 'Ena', 'Mizuki'] }
     ];
 
-    useEffect(() => {
-        fetchVoteCounts();
-    }, []);
-
     const fetchVoteCounts = async () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/csvote`);
             if (response.ok) {
                 const data = await response.json();
-                // Sort the data in descending order by count before setting state
-                const sortedData = data.sort((a, b) => b.count - a.count);
-                setVoteCounts(sortedData);
+                setVoteCounts(data.sort((a, b) => b.count - a.count)); // Sort data by count in descending order
             } else {
                 throw new Error('Failed to fetch vote counts');
             }
@@ -56,17 +46,17 @@ const CSVote = () => {
             toast.warn('Please select an option before submitting!');
             return;
         }
-
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/csvote`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ vote: selectedOption }) // Only send the selected option
+                body: JSON.stringify({ vote: selectedOption })
             });
             if (response.ok) {
                 toast.success('Vote submitted successfully');
                 setSelectedOption(null); // Clear selection
                 setHasVoted(true); // Prevent further voting
+                fetchVoteCounts(); // Refresh the vote counts
             } else {
                 throw new Error('Failed to submit vote');
             }
@@ -78,8 +68,8 @@ const CSVote = () => {
 
     return (
         <div>
-            <h1>Challenge Show Votes</h1>
-            <h4>Vote for who you want the challenge show to be</h4>
+            <h1>Challenge Show Vote</h1>
+            <p>Vote for who's challenge show you want me to play</p>
             {!hasVoted ? (
                 <form onSubmit={handleSubmit}>
                     {options.map((group, index) => (
@@ -106,7 +96,10 @@ const CSVote = () => {
                     <h2>Ranking</h2>
                     <ul>
                         {voteCounts.map(vote => (
-                            <li key={vote.vote}>{vote.vote}: {vote.count} votes</li>
+                            <li key={vote.vote} className="vote-item">
+                                <img src={`/assets/${vote.vote.toLowerCase()}.png`} alt={vote.vote} className="vote-image" />
+                                {vote.vote}: {vote.count} votes
+                            </li>
                         ))}
                     </ul>
                 </div>
