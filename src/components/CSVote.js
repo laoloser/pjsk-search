@@ -40,12 +40,49 @@ const CSVote = () => {
         setSelectedOption(option);
     };
 
+    useEffect(() => {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentDate = now.toDateString();
+        const voteData = JSON.parse(localStorage.getItem('voteData'));
+    
+        if (voteData) {
+            const lastVoteDate = new Date(voteData.date);
+            const lastVoteHour = lastVoteDate.getHours();
+            const lastVoteDateString = lastVoteDate.toDateString();
+    
+            if (lastVoteDateString === currentDate && lastVoteHour === currentHour) {
+                setHasVoted(true);
+            }
+        }
+    
+        fetchVoteCounts();
+    }, []);
+    
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!selectedOption) {
             toast.warn('Please select an option before submitting!');
             return;
         }
+    
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentDate = now.toDateString();
+        const voteData = JSON.parse(localStorage.getItem('voteData'));
+    
+        if (voteData) {
+            const lastVoteDate = new Date(voteData.date);
+            const lastVoteHour = lastVoteDate.getHours();
+            const lastVoteDateString = lastVoteDate.toDateString();
+    
+            if (lastVoteDateString === currentDate && lastVoteHour === currentHour) {
+                toast.warn('You can only vote once per hour.');
+                return;
+            }
+        }
+    
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/csvote`, {
                 method: 'POST',
@@ -57,6 +94,7 @@ const CSVote = () => {
                 setSelectedOption(null); // Clear selection
                 setHasVoted(true); // Prevent further voting
                 fetchVoteCounts(); // Refresh the vote counts
+                localStorage.setItem('voteData', JSON.stringify({ date: new Date() })); // Update last vote time
             } else {
                 throw new Error('Failed to submit vote');
             }
@@ -65,6 +103,9 @@ const CSVote = () => {
             toast.error('Error submitting vote');
         }
     };
+    
+    
+    
 
     return (
         <div>
