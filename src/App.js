@@ -29,7 +29,7 @@ const App = () => {
           <Route path={process.env.REACT_APP_DB_ENTRY_PATH} element={<DBEntry />} /> {/* Update Route usage */}
           <Route path="/songsearch" element={<><Home onSearch={handleSearch} /><SearchResults results={searchResults} /></>} /> {/* Wrap multiple components in a fragment */}
         <Route path="/csvote" element={<CSVote />} />
-        <Route path={process.env.VOTE_WIPE_PATH} element={<NukeVotes />} />
+        <Route path="/nukevotes" element={<NukeVotes />} />
         </Routes>
       </div>
     </Router>
